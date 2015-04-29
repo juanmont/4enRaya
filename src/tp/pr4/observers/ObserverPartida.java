@@ -2,6 +2,7 @@ package tp.pr4.observers;
 
 import tp.pr4.logica.Ficha;
 import tp.pr4.logica.Tablero;
+import tp.pr4.logica.TableroInmutable;
 import tp.pr4.logica.TipoJuego;
 
 public interface ObserverPartida {
@@ -41,16 +42,10 @@ public interface ObserverPartida {
 	public void onTurno(Ficha turno);
 	
 	/**
-	 * le envia a la vista el string del tablero a mostrar (para vista consola).
-	 * @param Tablero
-	 */
-	public void onMuestraTablero(String Tablero);
-	
-	/**
 	 * le dice a la vista que debe actualizar su tablero (para vista GUI)
 	 * @param tab: tablero con el que actualizar.
 	 */
-	public void actualizaTablero(Tablero tab);
+	public void actualizaTablero(TableroInmutable tab);
 	
 	/**
 	 * informa a la vista del tablero inicial con el que se empezará.

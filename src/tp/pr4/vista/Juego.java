@@ -20,7 +20,10 @@ import javax.swing.JTextField;
 
 import tp.pr4.control.ViewController;
 import tp.pr4.logica.TipoJuego;
-
+/**
+ * En esta clase se implementa el panel de Cambio de juego, que mostrara los tipos de juegos y
+ * podra elegir redimensionar el tablero en el caso de jugar a Gravity.
+ */
 public class Juego extends JPanel {
 	
 	private JComboBox box;
@@ -32,15 +35,18 @@ public class Juego extends JPanel {
 	private JTextField tColumnas;
 	private ViewController control;
 	
+	/**
+	 * Constructor al cual le pasamos el controlador de la ventana
+	 */
 	public Juego(final ViewController control) {
 		this.control = control;
-
+		//Etiqueta con la descripcion del panel
 		this.setBorder(BorderFactory.createTitledBorder("Cambio de juego"));
 		this.setBackground(new Color(153,217,234));
 		//Tipos de juego
 		String[] juego = {"Conecta4", "Complica", "Gravity" };
 		
-		
+		//Panel con los tipos de juego, si el juego es gravity habilita la posiblidad de cambiar el tama�o del tablero
 		box = new JComboBox(juego);
 		box.addActionListener(
 				new ActionListener(){
@@ -52,7 +58,7 @@ public class Juego extends JPanel {
 					}
 					
 				});
-		
+		//Boton con imagen, para aceptar el cambio de juego y comprobar si se ha cambiado el tama�o del tablero
 		cambiar = new JButton("Cambiar", new ImageIcon("Fotos/tick.png"));
 		cambiar.setBackground(new Color(127,127,127));
 		cambiar.addActionListener(
@@ -60,8 +66,17 @@ public class Juego extends JPanel {
 					public void actionPerformed(ActionEvent e){
 						String tipo = box.getSelectedItem().toString();
 						if(tipo.equalsIgnoreCase("Gravity")){
-							if(tFilas.getText() != "" && tColumnas.getText() != "")
-							control.cambiaJuego(TipoJuego.GR,Integer.parseInt(tColumnas.getText()), Integer.parseInt(tFilas.getText()));
+							if(tFilas.getText() != "" && tColumnas.getText() != ""){
+								try{
+									control.cambiaJuego(TipoJuego.GR,Integer.parseInt(tColumnas.getText()), Integer.parseInt(tFilas.getText()));
+									tColumnas.setText("");
+									tFilas.setText("");
+								}catch(NumberFormatException exc){
+									JOptionPane.showMessageDialog(cambiar, "Debe introducir números.");
+									tColumnas.setText("");
+									tFilas.setText("");
+								}
+							}
 							else
 								JOptionPane.showMessageDialog(cambiar, "Introduce parametros para el tablero");
 						}
@@ -86,15 +101,18 @@ public class Juego extends JPanel {
 		box.setPreferredSize(new Dimension(150,20));
 		cambiar.setPreferredSize(new Dimension (20,40));
 		this.setLayout(new BorderLayout());
-		
+		//A�adimos las componentes en su posicion correspondiente
 		this.add(box, BorderLayout.NORTH);
 		this.add(panelInterno, BorderLayout.CENTER);
 		this.add(cambiar, BorderLayout.SOUTH);
 		
 		this.setVisible(true);
 	}
-
-	public void inhabilitaBotones() {
-		cambiar.setEnabled(false);
+	
+	/**
+	 * Inhabilita el boton de este panel
+	 */
+	public void in_habilitaBotones(boolean habilita) {
+		cambiar.setEnabled(habilita);
 	}
 }

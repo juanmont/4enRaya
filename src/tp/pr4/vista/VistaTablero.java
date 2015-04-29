@@ -13,18 +13,30 @@ import tp.pr4.control.ViewController;
 import tp.pr4.logica.Ficha;
 import tp.pr4.logica.MovimientoInvalido;
 
+/**
+ * Panel con las componentes del tablero
+ */
 public class VistaTablero extends JPanel{
+	//Componentes
 	private JButton [][]mBotones;
 	private ViewController control;
-		
+	
+	/**
+	 * Constructor del tablero de fichas
+	 * @param control - Controlador de la vista de la ventana
+	 * @param x - Dimensiones del tablero
+	 * @param y - Dimensiones del tablero
+	 */
 	public VistaTablero(final ViewController control, final int x, final int y){
 		super();
 		this.control = control;
+		//Matriz de botones
 		mBotones = new JButton[x][y];
 		this.setLayout(new GridLayout(y,x));
 		for(int i = 0 ; i < y; i++) {
 			for(int j = 0; j < x; j++) {
 				JButton botonTab = new JButton();
+				// Color de los huecos vacios
 				botonTab.setBackground(Color.gray);
 				botonTab.addActionListener(
 						new ActionListener(){
@@ -37,6 +49,7 @@ public class VistaTablero extends JPanel{
 											
 									}
 								}
+							//Comprueba si se ha podido rellenar el tablero
 							} catch (MovimientoInvalido e1) {
 								JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 							}
@@ -48,6 +61,13 @@ public class VistaTablero extends JPanel{
 		}
 		this.setVisible(true);
 	}
+	
+	/**
+	 * Colorea la ficha en la matriz del  tablero
+	 * @param x - Posicion horizontal
+	 * @param y - Posicion vertical
+	 * @param color - Color de la ficha
+	 */
 	public void cambiaCasilla(int x, int y, Ficha color){
 		switch(color){
 		case BLANCA:

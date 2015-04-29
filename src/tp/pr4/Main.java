@@ -101,7 +101,7 @@ public class Main {
         Partida partida = new Partida(factoria.creaReglas(), juego);
         if(!window){
         	ConsoleController controlador = new ConsoleController(partida, factoria, juego);
-     		ViewConsole vistaConsola = new ViewConsole(controlador,in);
+     		ViewConsole vistaConsola = new ViewConsole(controlador,in, juego);
         	vistaConsola.run();
         }
         else{
@@ -119,7 +119,7 @@ public class Main {
 	 * @return - String
 	 */
 	private static String help(){
-		return "\nUse -h|--help para más detalles.";
+		return "\nUse -h|--help para mas detalles.";
 	}
 	
 	/**
@@ -138,14 +138,14 @@ public class Main {
         OptionBuilder.withArgName("columnNumber"); //<columnNumber>
 		OptionBuilder.hasArg(); //true
 		OptionBuilder.withLongOpt("tamX"); //"tamX"
-		OptionBuilder.withDescription("Número de columnas del tablero (sólo para Gravity). Por defecto, 10."); //Descripción
+		OptionBuilder.withDescription("Número de columnas del tablero (solo para Gravity). Por defecto, 10."); //Descripción
 		Option x = OptionBuilder.create("x"); //"x"
         opciones.addOption(x);
         //-------------------------------------------------
         OptionBuilder.withArgName("rowNumber"); //<rowNumber>
 		OptionBuilder.hasArg(); //true
 		OptionBuilder.withLongOpt("tamY"); //"tamY"
-		OptionBuilder.withDescription("Número de filas del tablero (sólo para Gravity). Por defecto, 10."); //Descripción
+		OptionBuilder.withDescription("Número de filas del tablero (solo para Gravity). Por defecto, 10."); //Descripción
 		Option y = OptionBuilder.create("y"); //"y"
         opciones.addOption(y);
         //------------------------------------------------

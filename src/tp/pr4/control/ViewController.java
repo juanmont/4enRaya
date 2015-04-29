@@ -42,6 +42,7 @@ public class ViewController {
 			break;
 		}
 		partida.cambiaJuego(juego);
+		partida.reset(factoria.creaReglas());
 	}
 	
 	/**

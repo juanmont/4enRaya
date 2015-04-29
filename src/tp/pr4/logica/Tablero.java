@@ -5,7 +5,7 @@ package tp.pr4.logica;
  * El tamaño se fija en el momento de la construcción,
  * y contiene métodos para acceder a la información de cada celda y para colocar fichas.
  */
-public class Tablero {
+public class Tablero implements TableroInmutable{
 	private Ficha [][] tablero;
 	private int ancho = 1;
 	private int alto = 1;

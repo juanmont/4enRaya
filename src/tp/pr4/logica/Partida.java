@@ -57,8 +57,9 @@ public class Partida {
 	
 	public void cambiaJuego(TipoJuego juego){
 		this.juego = juego;
-		for(ObserverPartida o: obs)
+		for(ObserverPartida o: obs){
 			o.onJuego(this.juego);
+		}
 	}
 	
 	/**
@@ -174,7 +175,7 @@ public class Partida {
 	 */
 	public void creaTablero() {
 		for(ObserverPartida o: obs)
-			o.onMuestraTablero(tab.creaTablero());
+			o.actualizaTablero(tab);
 	}
 
 	/**
